@@ -5,13 +5,13 @@
       <input type="email" id="mail" v-model="email" /> <br />
       <label for="password"> Mot de passe </label>
       <input type="text" id="password" v-model="password" /> <br />
-      <button @click="post">Se connecter</button>
+      <button @click.prevent="post">Se connecter</button>
     </form>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+import { HTTP } from "../axios";
 
 export default {
   name: "connection",
@@ -23,15 +23,17 @@ export default {
   },
   methods: {
     post() {
+      sessionStorage.clear();
       const user = {
         email: this.email,
         password: this.password,
       };
-      console.log(user);
-      axios
-        .post("auth/login", user)
-        .then((response) => console.log(response.data.id))
-        .catch((error) => console.log(error));
+      HTTP.post("auth/login", user)
+        .then((response) => localStorage.setItem("token", response.data.token))
+        .then(() => this.$router.push({ path: "Main" }))
+        .catch((error) => {
+          error;
+        });
     },
   },
 };

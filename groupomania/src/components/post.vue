@@ -1,6 +1,13 @@
 <template>
   <div>
-    {{ info }}
+    <ul>
+      <li v-for="post in posts" v-bind:key="post">
+        {{ post.User.firstName }} {{ post.User.lastName }} a écrit
+        {{ post.title }}
+        <br />
+        {{ post.post }} <br />
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -9,15 +16,15 @@ import { authHttp } from "../axios";
 
 export default {
   name: "post",
-  data: () => {
+  data() {
     return {
-      info: null,
+      posts: [],
     };
   },
-  mounted() {
+  created() {
     authHttp
       .get("post")
-      .then((response) => (this.info = response))
+      .then((response) => (this.posts = response.data))
       .catch((error) => ({ error }));
   },
 };
@@ -26,5 +33,13 @@ export default {
 <style scoped>
 input {
   margin: 10px;
+}
+
+ul {
+  padding: 20px;
+}
+
+li {
+  padding: 20px;
 }
 </style>

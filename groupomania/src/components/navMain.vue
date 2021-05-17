@@ -7,6 +7,11 @@
 
 <script>
 export default {
-  name: "Main",
+  name: "navMain",
+  data() {
+    return {};
+  },
 };
 </script>
+
+<style scoped></style>

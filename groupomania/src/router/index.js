@@ -3,6 +3,8 @@ import Home from "../views/Home.vue";
 import Main from "../views/Main.vue";
 import Post from "../components/post.vue";
 import NewPost from "../components/newPost.vue";
+import Comment from "../components/comment.vue";
+import newComment from "../components/newComment.vue";
 
 const routes = [
   {
@@ -19,6 +21,18 @@ const routes = [
         path: "/post",
         name: "Post",
         component: Post,
+        children: [
+          {
+            path: "/:id/comment",
+            name: "comment",
+            component: Comment,
+          },
+          {
+            path: "/:id/newComment",
+            name: "newComment",
+            component: newComment,
+          },
+        ],
       },
       {
         path: "/newPost",

@@ -12,7 +12,7 @@ export default {
   name: "Main",
   methods: {
     disconnect() {
-      sessionStorage.clear();
+      localStorage.clear();
       this.$router.push({ path: "/" });
     },
   },

@@ -1,18 +1,16 @@
 <template>
   <div>
-    <ul>
-      <li v-for="post in posts" v-bind:key="post.id">
-        {{ post.User.firstName }} {{ post.User.lastName }} a écrit
-        {{ post.title }}
-        <br />
-        {{ post.post }} <br />
-        <Comment v-bind:id="post.id" />
-        <router-link :to="{ name: 'newComment', params: { id: post.id } }">
-          Poster un commentaire
-        </router-link>
-      </li>
-      <router-view />
-    </ul>
+    <div v-for="post in posts" v-bind:key="post.id">
+      {{ post.User.firstName }} {{ post.User.lastName }} a écrit
+      {{ post.title }}
+      <br />
+      {{ post.post }} <br />
+      <Comment v-bind:id="post.id" />
+      <router-link :to="{ name: 'newComment', params: { id: post.id } }">
+        Poster un commentaire
+      </router-link>
+    </div>
+    <router-view />
   </div>
 </template>
 

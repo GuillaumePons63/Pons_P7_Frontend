@@ -5,6 +5,9 @@
       <input type="text" id="title" v-model="title" />
       <label for="post"> Ecrire un post </label>
       <input type="text" id="post" v-model="post" /> <br />
+      <input type="text" name="alt-picture" v-model="altText" />
+      <label for="picture"> Envoie d'image </label>
+      <input type="file" name="picture" id="picture" @change="onselect" />
       <button @click.prevent="newPost">Envoyer</button>
     </form>
   </div>
@@ -19,16 +22,24 @@ export default {
     return {
       post: null,
       title: null,
+      altText: null,
+      file: null,
     };
   },
   methods: {
+    onselect(event) {
+      this.file = event.target.files[0];
+    },
     newPost() {
+      const formData = new FormData();
+      formData.append("file", this.file);
       const newPost = {
         title: this.title,
         post: this.post,
       };
+      formData.append("body", JSON.stringify(newPost));
       authHttp
-        .post("post/newPost", newPost)
+        .post("post/newPost", formData)
         .then(() => this.$router.push({ path: "Main" }))
         .catch((error) => console.log(error));
     },

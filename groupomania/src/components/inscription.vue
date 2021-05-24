@@ -18,10 +18,10 @@
 </template>
 
 <script>
-import axios from "axios";
+import { HTTP } from "../axios";
 
 export default {
-  name: "connection",
+  name: "inscription",
   data: () => {
     return {
       email: null,
@@ -41,8 +41,7 @@ export default {
         job: this.job,
       };
       console.log(user);
-      axios
-        .post("auth/signup", user)
+      HTTP.post("auth/signup", user)
         .then((response) => console.log(response.data.id))
         .catch((error) => console.log(error));
     },

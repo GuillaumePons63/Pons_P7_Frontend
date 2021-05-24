@@ -19,7 +19,7 @@ import { authHttp } from "../axios";
 import Comment from "../components/comment";
 
 export default {
-  name: "post",
+  name: "posts",
   data() {
     return {
       posts: [],

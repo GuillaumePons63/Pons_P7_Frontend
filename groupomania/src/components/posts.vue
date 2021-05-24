@@ -1,22 +1,21 @@
 <template>
   <div>
-    <div v-for="post in posts" v-bind:key="post.id">
-      {{ post.User.firstName }} {{ post.User.lastName }} a écrit
-      {{ post.title }}
-      <br />
-      {{ post.post }} <br />
-      <Comment v-bind:id="post.id" />
-      <router-link :to="{ name: 'newComment', params: { id: post.id } }">
-        Poster un commentaire
-      </router-link>
-    </div>
-    <router-view />
+    <OnePost
+      v-for="post in posts"
+      :key="post.id"
+      :firstName="post.firstName"
+      :lastName="post.lastName"
+      :title="post.title"
+      :post="post.post"
+    />
+    <Comment v-bind:id="post.id" />
   </div>
 </template>
 
 <script>
 import { authHttp } from "../axios";
 import Comment from "../components/comment";
+import OnePost from "../components/onePost";
 
 export default {
   name: "posts",
@@ -25,7 +24,7 @@ export default {
       posts: [],
     };
   },
-  components: { Comment },
+  components: { Comment, OnePost },
   created() {
     authHttp
       .get("post")

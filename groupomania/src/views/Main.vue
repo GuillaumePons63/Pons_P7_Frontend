@@ -1,9 +1,5 @@
 <template>
   <div>
-    <!-- <router-link :to="{ name: 'Post' }"> Les derniers posts </router-link> |
-    <router-link :to="{ name: 'newPost' }"> Ecrire un post </router-link> |
-    <a @click="disconnect"> Se déconnecter </a>
-    <router-view></router-view> -->
     <button
       v-for="tab in tabs"
       v-bind:key="tab"
@@ -25,7 +21,7 @@ export default {
   name: "Main",
   data() {
     return {
-      currentTab: "Posts",
+      currentTab: "newPost",
       tabs: ["Posts", "newPost", "Disconnect"],
     };
   },

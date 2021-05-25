@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <button
       v-for="tab in tabs"
       v-bind:key="tab"

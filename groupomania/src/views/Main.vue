@@ -1,6 +1,7 @@
 <template>
   <div>
     <button
+      class="btn btn-primary"
       v-for="tab in tabs"
       v-bind:key="tab"
       v-bind:class="['tab-button', { active: currentTab === tab }]"

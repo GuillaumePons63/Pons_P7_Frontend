@@ -3,7 +3,10 @@
     <h2>{{ firstName }} {{ lastName }} à publié {{ title }}</h2>
     <img :src="src" class="img" /> <br />
     <h3>{{ post }}</h3>
-
+    <button v-show="userId == localUser" @click="deletePost(id)">
+      Supprimer
+    </button>
+    <br />
     <button @click="getComment(id)">
       Voir les commentaires
     </button>
@@ -36,9 +39,10 @@ export default {
       noComment: "",
       newCommentVisible: "",
       urlNewComment: "",
+      localUser: localStorage.getItem("userId"),
     };
   },
-  props: ["firstName", "lastName", "title", "src", "post", "id"],
+  props: ["firstName", "lastName", "title", "src", "post", "id", "userId"],
   components: { Comment, NewComment },
   methods: {
     getComment(id) {
@@ -56,6 +60,10 @@ export default {
     propsPostId(id) {
       this.newCommentVisible = "visible";
       this.urlNewComment = "post/" + id + "/newComment";
+    },
+    deletePost(id) {
+      let url = "post/" + id;
+      authHttp.delete(url).then(() => document.location.reload());
     },
   },
 };

@@ -8,6 +8,7 @@
       :lastName="post.user.lastName"
       :title="post.title"
       :post="post.post"
+      :userId="post.userId"
       v-bind:src="post.imageUrl"
     />
   </div>

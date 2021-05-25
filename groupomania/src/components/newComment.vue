@@ -17,13 +17,13 @@ export default {
   },
   props: ["urlNewComment", "postid"],
   methods: {
-    newComment(postid) {
+    newComment() {
       const newComment = {
         comment: this.comment,
       };
       authHttp
         .post(this.urlNewComment, newComment)
-        .then(() => this.$emit("update", { id: postid }))
+        .then(() => document.location.reload())
         .catch((error) => {
           error;
         });

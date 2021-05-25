@@ -29,7 +29,10 @@ export default {
         password: this.password,
       };
       HTTP.post("auth/login", user)
-        .then((response) => localStorage.setItem("token", response.data.token))
+        .then((response) => {
+          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("userId", response.data.userId);
+        })
         .then(() => this.$router.push({ path: "Main" }))
         .catch((error) => {
           error;

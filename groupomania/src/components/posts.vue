@@ -3,18 +3,19 @@
     <OnePost
       v-for="post in posts"
       :key="post.id"
-      :firstName="post.firstName"
-      :lastName="post.lastName"
+      :id="post.id"
+      :firstName="post.user.firstName"
+      :lastName="post.user.lastName"
       :title="post.title"
       :post="post.post"
+      v-bind:src="post.imageUrl"
     />
-    <Comment v-bind:id="post.id" />
   </div>
 </template>
 
 <script>
 import { authHttp } from "../axios";
-import Comment from "../components/comment";
+
 import OnePost from "../components/onePost";
 
 export default {
@@ -24,7 +25,7 @@ export default {
       posts: [],
     };
   },
-  components: { Comment, OnePost },
+  components: { OnePost },
   created() {
     authHttp
       .get("post")

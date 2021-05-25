@@ -1,31 +1,34 @@
 <template>
   <div>
-    <ul>
-      <li v-for="comment in comments" v-bind:key="comment.id">
-        {{ comment.User.firstName }} {{ comment.User.lastName }} a commenté
-        {{ comment.comment }}
-      </li>
-    </ul>
+    <div>
+      {{ firstName }} {{ lastName }} a commenté <br />
+      {{ comment }}
+    </div>
+    <div>
+      <button @click="newComment(postid)">Ecrire un commentaire</button>
+      <NewComment />
+    </div>
   </div>
 </template>
 
 <script>
-import { authHttp } from "../axios";
+import NewComment from "../components/newComment";
 
 export default {
   name: "comment",
   data() {
     return {
-      comments: [],
+      clique: "",
+      id: null,
     };
   },
-  props: ["id"],
-  created() {
-    let url = "post/" + this.id + "/comment";
-    authHttp
-      .get(url)
-      .then((response) => (this.comments = response.data))
-      .catch((error) => ({ error }));
+  props: ["firstName", "lastName", "comment", "postid", "state"],
+  component: { NewComment },
+  methods: {
+    newComment(postid) {
+      this.clique = "clique";
+      this.id = postid;
+    },
   },
 };
 </script>

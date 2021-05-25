@@ -21,7 +21,7 @@ export default {
   name: "Main",
   data() {
     return {
-      currentTab: "newPost",
+      currentTab: "Posts",
       tabs: ["Posts", "newPost", "Disconnect"],
     };
   },

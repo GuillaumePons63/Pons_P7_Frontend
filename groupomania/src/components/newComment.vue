@@ -1,7 +1,7 @@
 <template>
   <div>
     <input type="text" id="comment" v-model="comment" />
-    <button @click.prevent="newComment">Commenter</button>
+    <button @click="newComment(postid)">Commenter</button>
   </div>
 </template>
 
@@ -15,15 +15,15 @@ export default {
       comment: null,
     };
   },
+  props: ["urlNewComment", "postid"],
   methods: {
-    newComment() {
+    newComment(postid) {
       const newComment = {
         comment: this.comment,
       };
-      let url = "post/" + this.$route.params.id + "/newComment";
       authHttp
-        .post(url, newComment)
-        .then(() => this.$router.push({ name: "Main" }))
+        .post(this.urlNewComment, newComment)
+        .then(() => this.$emit("update", { id: postid }))
         .catch((error) => {
           error;
         });

@@ -16,6 +16,7 @@ const routes = [
     path: "/main",
     name: "Main",
     component: Main,
+    meta: { requiresAuth: true },
     children: [
       {
         path: "/post",
@@ -48,4 +49,17 @@ const router = createRouter({
   routes,
 });
 
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth) {
+    if (!localStorage.getItem("token")) {
+      next({
+        name: "Home",
+      });
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+});
 export default router;

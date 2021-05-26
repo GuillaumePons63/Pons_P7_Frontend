@@ -1,16 +1,18 @@
 <template>
   <div>
-    <OnePost
-      v-for="post in posts"
-      :key="post.id"
-      :id="post.id"
-      :firstName="post.user.firstName"
-      :lastName="post.user.lastName"
-      :title="post.title"
-      :post="post.post"
-      :userId="post.userId"
-      v-bind:src="post.imageUrl"
-    />
+    <div>
+      <OnePost
+        v-for="post in posts"
+        :key="post.id"
+        :id="post.id"
+        :firstName="post.user.firstName"
+        :lastName="post.user.lastName"
+        :title="post.title"
+        :post="post.post"
+        :userId="post.userId"
+        v-bind:src="post.imageUrl"
+      />
+    </div>
   </div>
 </template>
 

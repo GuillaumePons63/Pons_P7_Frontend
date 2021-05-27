@@ -4,6 +4,10 @@
       {{ firstName }} {{ lastName }} a commenté <br />
       {{ comment }}
     </div>
+    <div v-show="userId == localUser">
+      <button>modifier</button>
+      <button>Supprimer</button>
+    </div>
   </div>
 </template>
 
@@ -11,9 +15,11 @@
 export default {
   name: "comment",
   data() {
-    return {};
+    return {
+      localUser: localStorage.getItem("userId"),
+    };
   },
-  props: ["firstName", "lastName", "comment"],
+  props: ["firstName", "lastName", "comment", "userId"],
 };
 </script>
 

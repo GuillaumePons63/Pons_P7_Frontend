@@ -5,6 +5,7 @@ import Posts from "../components/posts.vue";
 import NewPost from "../components/newPost.vue";
 import Comment from "../components/comment.vue";
 import newComment from "../components/newComment.vue";
+import modifyPost from "../components/modifyPost.vue";
 
 const routes = [
   {
@@ -41,6 +42,12 @@ const routes = [
         component: NewPost,
       },
     ],
+  },
+  {
+    path: "/post/:id",
+    name: "modifyPost",
+    component: modifyPost,
+    props: true,
   },
 ];
 

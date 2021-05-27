@@ -8,7 +8,7 @@
       <input type="text" name="alt-picture" v-model="altText" />
       <label for="picture"> Envoie d'image </label>
       <input type="file" name="picture" id="picture" @change="onselect" />
-      <button @click.prevent="newPost">Envoyer</button>
+      <button @click.prevent="newPost()">Envoyer</button>
     </form>
   </div>
 </template>
@@ -40,7 +40,7 @@ export default {
       formData.append("body", JSON.stringify(newPost));
       authHttp
         .post("post/newPost", formData)
-        .then(() => this.$router.push({ path: "Main" }))
+        //.then(() => this.$router.push({ name: "Main" }))
         .catch((error) => console.log(error));
     },
   },

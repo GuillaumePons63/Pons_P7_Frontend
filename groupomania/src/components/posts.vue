@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div>
+  <div class="container">
+    <div class="row">
       <OnePost
         v-for="post in posts"
         :key="post.id"
@@ -10,6 +10,7 @@
         :title="post.title"
         :post="post.post"
         :userId="post.userId"
+        :date="post.createdAt"
         v-bind:src="post.imageUrl"
       />
     </div>

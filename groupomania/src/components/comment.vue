@@ -1,17 +1,20 @@
 <template class="container">
   <div class="row">
-    <div>
-      {{ firstName }} {{ lastName }} a commenté <br />
-      {{ comment }}
+    <div class="mt-3">
+      <div class="bg-secondary bg-gradient">{{ firstName }} {{ lastName }}</div>
+
+      <div>{{ comment }}</div>
     </div>
     <div v-show="userId == localUser">
-      <button>modifier</button>
-      <button>Supprimer</button>
+      <button @click="deleteComment(id)" class="btn btn-danger m-2">
+        Supprimer
+      </button>
     </div>
   </div>
 </template>
 
 <script>
+import { authHttp } from "../axios";
 export default {
   name: "comment",
   data() {
@@ -19,7 +22,13 @@ export default {
       localUser: localStorage.getItem("userId"),
     };
   },
-  props: ["firstName", "lastName", "comment", "userId"],
+  props: ["firstName", "lastName", "comment", "userId", "id"],
+  methods: {
+    deleteComment(id) {
+      let url = "/post/comment/" + id;
+      authHttp.delete(url).then(() => document.location.reload());
+    },
+  },
 };
 </script>
 

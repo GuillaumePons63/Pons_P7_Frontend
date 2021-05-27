@@ -1,14 +1,20 @@
 <template>
-  <div>
-    <h2>{{ firstName }} {{ lastName }} à publié {{ title }}</h2>
-    <img :src="src" class="img" /> <br />
-    <h3>{{ post }}</h3>
-    <button v-show="userId == localUser" @click="deletePost(id)">
+  <div class="card col-lg-4 mt-3">
+    <div class="card-header">
+      {{ dateDisplay }} {{ firstName }} {{ lastName }} a publié {{ title }}
+    </div>
+    <img class="card-img-top" :src="src" alt="altText" /> <br />
+    <p class="cardbody">{{ post }}</p>
+    <button
+      class="btn btn-danger mt-3"
+      v-show="userId == localUser"
+      @click="deletePost(id)"
+    >
       Supprimer
     </button>
 
     <button
-      class="btn btn-primary"
+      class="btn btn-primary mt-3"
       v-show="userId == localUser"
       @click="showModifyPost(title)"
     >
@@ -18,7 +24,7 @@
     <ModifyPost v-show="modifyPost === 'visible'" :Id="id" :title="Title" />
 
     <br />
-    <button @click="getComment(id)">
+    <button class="btn btn-secondary mt-3" @click="getComment(id)">
       Voir les commentaires
     </button>
     <div v-show="noComment === 'visible'">Il n'y a aucun commentaire</div>
@@ -30,8 +36,11 @@
       :lastName="comment.user.lastName"
       :comment="comment.comment"
       :userId="comment.userId"
+      :id="comment.id"
     />
-    <button @click="propsPostId(id)">Ecrire un commentaire</button>
+    <button class="btn btn-secondary mt-3" @click="propsPostId(id)">
+      Ecrire un commentaire
+    </button>
 
     <NewComment
       v-show="newCommentVisible === 'visible'"
@@ -45,6 +54,7 @@ import Comment from "../components/comment";
 import { authHttp } from "../axios";
 import NewComment from "../components/newComment";
 import ModifyPost from "../components/modifyPost";
+import moment from "moment";
 
 export default {
   name: "onePost",
@@ -58,13 +68,24 @@ export default {
       modifyPost: "",
       Id: "",
       Title: "",
+      dateDisplay: "",
     };
   },
-  props: ["firstName", "lastName", "title", "src", "post", "id", "userId"],
+  props: [
+    "firstName",
+    "lastName",
+    "title",
+    "src",
+    "post",
+    "id",
+    "userId",
+    "date",
+  ],
   components: { Comment, NewComment, ModifyPost },
-  created(id, title) {
-    this.Id = id;
-    this.Title = title;
+  created() {
+    moment.locale("fr");
+
+    this.dateDisplay = moment(this.date).calendar();
   },
   methods: {
     getComment(id) {

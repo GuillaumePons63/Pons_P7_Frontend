@@ -1,5 +1,5 @@
-<template>
-  <div>
+<template class="container">
+  <div class="row">
     <div>
       {{ firstName }} {{ lastName }} a commenté <br />
       {{ comment }}

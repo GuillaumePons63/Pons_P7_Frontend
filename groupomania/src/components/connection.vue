@@ -1,12 +1,23 @@
 <template>
-  <div>
-    <form>
-      <label for="mail"> E-mail </label>
-      <input type="email" id="mail" v-model="email" /> <br />
-      <label for="password"> Mot de passe </label>
-      <input type="password" id="password" v-model="password" /> <br />
-      <button @click.prevent="post">Se connecter</button>
-    </form>
+  <div class="container">
+    <label for="mail" class="col-12 col-form-label"> E-mail </label>
+    <div class="col-10 mx-auto">
+      <input type="email" id="mail" class="form-control m-0 " v-model="email" />
+    </div>
+    <label for="password" class="col-12 col-form-label">
+      Mot de passe
+    </label>
+    <div class="col-10 d-block mx-auto">
+      <input
+        type="password"
+        id="password"
+        class="form-control m-0"
+        v-model="password"
+      />
+    </div>
+    <button class="btn btn-secondary mt-3" @click.prevent="post">
+      Se connecter
+    </button>
   </div>
 </template>
 

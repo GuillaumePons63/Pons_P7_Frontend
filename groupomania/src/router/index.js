@@ -1,53 +1,32 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import Main from "../views/Main.vue";
-import Posts from "../components/posts.vue";
-import NewPost from "../components/newPost.vue";
-import Comment from "../components/comment.vue";
-import newComment from "../components/newComment.vue";
-import modifyPost from "../components/modifyPost.vue";
+import Connection from "../components/connection.vue";
+import Inscription from "../components/inscription.vue";
 
 const routes = [
   {
     path: "/",
     name: "Home",
     component: Home,
+    children: [
+      {
+        path: "/connection",
+        name: "connection",
+        component: Connection,
+      },
+      {
+        path: "/inscription",
+        name: "inscription",
+        component: Inscription,
+      },
+    ],
   },
   {
     path: "/main",
     name: "Main",
     component: Main,
     meta: { requiresAuth: true },
-    children: [
-      {
-        path: "/post",
-        name: "Post",
-        component: Posts,
-        children: [
-          {
-            path: "/:id/comment",
-            name: "comment",
-            component: Comment,
-          },
-          {
-            path: "/:id/newComment",
-            name: "newComment",
-            component: newComment,
-          },
-        ],
-      },
-      {
-        path: "/newPost",
-        name: "newPost",
-        component: NewPost,
-      },
-    ],
-  },
-  {
-    path: "/post/:id",
-    name: "modifyPost",
-    component: modifyPost,
-    props: true,
   },
 ];
 

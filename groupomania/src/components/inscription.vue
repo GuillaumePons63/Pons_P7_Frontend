@@ -1,19 +1,44 @@
 <template>
-  <div>
-    <form>
-      <label for="mail"> E-mail </label>
-      <input type="email" id="mail" v-model="email" /> <br />
-      <label for="password"> Mot de passe </label>
-      <input type="text" id="password" v-model="password" /> <br />
-      <label for="firstName"> Prénom </label>
-      <input type="text" id="firstName" v-model="firstName" /> <br />
-      <label for="lastName"> Nom </label>
-      <input type="text" id="lastName" v-model="lastName" /> <br />
-      <label for="job"> Métier </label>
-      <input type="text" id="job" v-model="job" /> <br />
+  <div class="container">
+    <label for="mail" class="col-12 col-form-label"> E-mail </label>
+    <div class="col-10 mx-auto">
+      <input type="email" id="mail" class="form-control m-0" v-model="email" />
+    </div>
 
-      <button @click="post">s'inscrire</button>
-    </form>
+    <label for="password" class="col-12 col-form-label"> Mot de passe </label>
+
+    <div class="col-10 mx-auto">
+      <input
+        type="password"
+        id="password"
+        class="form-control m-0"
+        v-model="password"
+      />
+    </div>
+
+    <label for="firstName" class="col-12 col-form-label"> Prénom </label>
+    <div class="col-10 mx-auto">
+      <input
+        type="text"
+        id="firstName"
+        class="form-control m-0"
+        v-model="firstName"
+      />
+    </div>
+    <label for="lastName" class="col-12 col-form-label"> Nom </label>
+    <div class="col-10 mx-auto">
+      <input
+        type="text"
+        id="lastName"
+        class="form-control m-0"
+        v-model="lastName"
+      />
+    </div>
+    <label for="job" class="col-12 col-form-label"> Métier </label>
+    <div class="col-10 mx-auto">
+      <input type="text" id="job" class="form-control m-0" v-model="job" />
+    </div>
+    <button @click="post" class="btn btn-secondary mt-3">S'inscrire</button>
   </div>
 </template>
 

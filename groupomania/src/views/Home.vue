@@ -1,35 +1,33 @@
-<template>
-  <div class="container">
-    <button
-      v-for="tab in tabs"
-      v-bind:key="tab"
-      v-bind:class="['tab-button', { active: currentTab === tab }]"
-      v-on:click="currentTab = tab"
-    >
-      {{ tab }}
-    </button>
-    <component v-bind:is="currentTabComponent"></component>
+<template class="container">
+  <div class="row">
+    <div class="jumbotron bg-light">
+      <h1>Bienvenue sur le réseau de Groupomania</h1>
+    </div>
+    <div>
+      <img
+        src="../assets/icon.png"
+        class="rounded col-2"
+        alt="icone de l'entreprise Groupomania"
+      />
+    </div>
+    <div class="col-2"></div>
+    <router-link to="/connection" class="col-3  btn btn-primary">
+      Se connecter
+    </router-link>
+    <div class="col-2"></div>
+    <router-link to="/inscription" class="col-3 btn btn-primary">
+      S'inscrire
+    </router-link>
+    <div class="col-2"></div>
+    <router-view />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import Connection from "@/components/connection.vue";
-import Inscription from "@/components/inscription.vue";
-
 export default {
   name: "Home",
   data() {
-    return {
-      currentTab: "Connection",
-      tabs: ["Connection", "Inscription"],
-    };
-  },
-  components: { Connection, Inscription },
-  computed: {
-    currentTabComponent() {
-      return this.currentTab;
-    },
+    return {};
   },
 };
 </script>

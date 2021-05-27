@@ -1,14 +1,41 @@
 <template>
-  <div>
+  <div class="container">
     <form>
-      <label for="title"> Titre </label>
-      <input type="text" id="title" v-model="title" />
-      <label for="post"> Ecrire un post </label>
-      <input type="text" id="post" v-model="post" /> <br />
-      <input type="text" name="alt-picture" v-model="altText" />
-      <label for="picture"> Envoie d'image </label>
-      <input type="file" name="picture" id="picture" @change="onselect" />
-      <button @click.prevent="newPost()">Envoyer</button>
+      <label for="title" class="col-12 col-form-label">
+        Titre de la publication
+      </label>
+      <div class="col-10 d-block mx-auto">
+        <input type="text" class="form-control m-0" v-model="title" required />
+      </div>
+      <label for="post" class="col-12 col-form-label">
+        Corps de la publication
+      </label>
+      <div class="col-10 d-block mx-auto">
+        <input type="text" class="form-control m-0" v-model="post" required />
+      </div>
+      <label for="alt-picture" class="col-12 col-form-label">
+        Description de l'image
+      </label>
+      <div class="col-10 d-block mx-auto">
+        <input
+          type="text"
+          class="form-control m-0"
+          name="alt-picture"
+          v-model="altText"
+          required
+        />
+      </div>
+
+      <input
+        type="file"
+        name="picture"
+        @change="onselect"
+        class="btn btn-primary"
+        required
+      />
+      <button class="btn btn-secondary" @submit="newPost()">
+        Envoyer
+      </button>
     </form>
   </div>
 </template>

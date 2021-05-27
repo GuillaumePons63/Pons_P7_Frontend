@@ -1,13 +1,38 @@
 <template>
-  <div>
-    <label for="title"> Titre </label>
-    <input type="text" id="title" v-model.lazy="titleModify" />
-    <label for="post"> Ecrire un post </label>
-    <input type="text" id="post" v-model="postModify" />
-    <input type="text" name="alt-picture" v-model="altText" />
-    <label for="picture"> Envoie d'image </label>
-    <input type="file" name="picture" id="picture" @change="onselect" />
-    <button @click="modifyPost(Id)">Envoyer</button>
+  <div class="container">
+    <label for="title" class="col-12 col-form-label">
+      Titre de la publication
+    </label>
+    <div class="col-10 d-block mx-auto">
+      <input type="text" class="form-control m-0" v-model="titleModify" />
+    </div>
+    <label for="post" class="col-12 col-form-label">
+      Corps de la publication
+    </label>
+    <div class="col-10 d-block mx-auto">
+      <input type="text" class="form-control m-0" v-model="postModify" />
+    </div>
+    <label for="alt-picture" class="col-12 col-form-label">
+      Description de l'image
+    </label>
+    <div class="col-10 d-block mx-auto">
+      <input
+        type="text"
+        class="form-control m-0"
+        name="alt-picture"
+        v-model="altTextModify"
+      />
+    </div>
+
+    <input
+      type="file"
+      name="picture"
+      @change="onselect"
+      class="btn btn-primary"
+    />
+    <button class="btn btn-secondary" @click.prevent="newPost()">
+      Envoyer
+    </button>
   </div>
 </template>
 

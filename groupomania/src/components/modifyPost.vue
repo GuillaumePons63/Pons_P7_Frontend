@@ -3,7 +3,7 @@
     <label for="title"> Titre </label>
     <input type="text" id="title" v-model.lazy="titleModify" />
     <label for="post"> Ecrire un post </label>
-    <input type="text" id="post" v-model="postmodify" /> <br />
+    <input type="text" id="post" v-model="postModify" />
     <input type="text" name="alt-picture" v-model="altText" />
     <label for="picture"> Envoie d'image </label>
     <input type="file" name="picture" id="picture" @change="onselect" />
@@ -24,11 +24,6 @@ export default {
     };
   },
   props: ["Id", "title"],
-  created(title) {
-    console.log(this.title);
-    console.log(this.titleModify);
-    this.titleModify = title;
-  },
   methods: {
     onselect(event) {
       this.file = event.target.files[0];

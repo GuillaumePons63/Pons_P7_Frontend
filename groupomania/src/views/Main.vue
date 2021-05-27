@@ -1,49 +1,38 @@
 <template>
-  <div>
-    <button
-      class="btn btn-primary"
-      v-for="tab in tabs"
-      v-bind:key="tab"
-      v-bind:class="['tab-button', { active: currentTab === tab }]"
-      v-on:click="currentTab = tab"
-    >
-      {{ tab }}
-    </button>
-
-    <component v-bind:is="currentTabComponent"></component>
+  <div class="container-fluid ">
+    <div class="row bg-light">
+      <img src="../assets/icon-left-font.png" class="col-12" />
+    </div>
+    <nav class="row bg-light">
+      <div class="col-md-2"></div>
+      <router-link to="/posts" class="btn btn-secondary col-md-2 mt-2">
+        Toutes les publications</router-link
+      >
+      <div class="col-md-1"></div>
+      <router-link to="/newPost" class="btn btn-secondary col-md-2 mt-2">
+        Créer une publication
+      </router-link>
+      <div class="col-md-1"></div>
+      <router-link to="/disconnect" class="btn btn-secondary col-md-2 mt-2">
+        Se déconnecter
+      </router-link>
+      <div class="col-md-2"></div>
+    </nav>
+    <router-view />
   </div>
 </template>
 
 <script>
-import Posts from "../components/posts";
-import newPost from "../components/newPost";
-import Disconnect from "../components/disconnect";
-
 export default {
   name: "Main",
   data() {
-    return {
-      currentTab: "Posts",
-      tabs: ["Posts", "newPost", "Disconnect"],
-    };
-  },
-  components: { Posts, newPost, Disconnect },
-  methods: {
-    disconnect() {
-      localStorage.clear();
-      this.$router.push({ path: "/" });
-    },
-  },
-  computed: {
-    currentTabComponent() {
-      return this.currentTab;
-    },
+    return {};
   },
 };
 </script>
 
 <style scoped>
-a:hover {
-  cursor: pointer;
+.max-height {
+  max-height: 200px;
 }
 </style>

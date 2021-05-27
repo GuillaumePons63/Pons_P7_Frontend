@@ -3,6 +3,9 @@ import Home from "../views/Home.vue";
 import Main from "../views/Main.vue";
 import Connection from "../components/connection.vue";
 import Inscription from "../components/inscription.vue";
+import Posts from "../components/posts.vue";
+import NewPost from "../components/newPost.vue";
+import Disconnect from "../components/disconnect.vue";
 
 const routes = [
   {
@@ -27,6 +30,23 @@ const routes = [
     name: "Main",
     component: Main,
     meta: { requiresAuth: true },
+    children: [
+      {
+        path: "/posts",
+        name: "posts",
+        component: Posts,
+      },
+      {
+        path: "/newPost",
+        name: "newPost",
+        component: NewPost,
+      },
+      {
+        path: "/disconnect",
+        name: "disconnect",
+        component: Disconnect,
+      },
+    ],
   },
 ];
 

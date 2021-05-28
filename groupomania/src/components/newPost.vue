@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <form>
+    <form @submit="newPost()">
       <label for="title" class="col-12 col-form-label">
         Titre de la publication
       </label>
@@ -33,7 +33,7 @@
         class="btn btn-primary"
         required
       />
-      <button class="btn btn-secondary" @submit="newPost()">
+      <button class="btn btn-secondary">
         Envoyer
       </button>
     </form>

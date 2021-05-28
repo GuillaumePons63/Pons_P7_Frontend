@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <form>
+    <form @submit="post()">
       <label for="mail" class="col-12 col-form-label"> E-mail </label>
       <div class="col-10 mx-auto">
         <input

@@ -18,6 +18,14 @@
       </router-link>
       <div class="col-md-2"></div>
     </nav>
+    <div>
+      <router-link
+        v-show="isAdmin == 'true'"
+        to="/administration"
+        class="btn btn-danger"
+        >Administration
+      </router-link>
+    </div>
     <router-view />
   </div>
 </template>
@@ -26,7 +34,9 @@
 export default {
   name: "Main",
   data() {
-    return {};
+    return {
+      isAdmin: localStorage.getItem("isAdmin"),
+    };
   },
 };
 </script>

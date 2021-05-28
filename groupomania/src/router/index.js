@@ -6,6 +6,7 @@ import Inscription from "../components/inscription.vue";
 import Posts from "../components/posts.vue";
 import NewPost from "../components/newPost.vue";
 import Disconnect from "../components/disconnect.vue";
+import Administration from "../views/Administration.vue";
 
 const routes = [
   {
@@ -47,6 +48,11 @@ const routes = [
         component: Disconnect,
       },
     ],
+  },
+  {
+    path: "/administration",
+    name: "administration",
+    component: Administration,
   },
 ];
 

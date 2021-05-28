@@ -67,7 +67,7 @@ export default {
       formData.append("body", JSON.stringify(newPost));
       authHttp
         .post("post/newPost", formData)
-        //.then(() => this.$router.push({ name: "Main" }))
+        .then(() => this.$router.push({ name: "posts" }))
         .catch((error) => console.log(error));
     },
   },

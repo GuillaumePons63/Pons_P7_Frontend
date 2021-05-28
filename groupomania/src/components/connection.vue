@@ -41,6 +41,7 @@ export default {
       };
       HTTP.post("auth/login", user)
         .then((response) => {
+          localStorage.setItem("isAdmin", response.data.isAdmin);
           localStorage.setItem("token", response.data.token);
           localStorage.setItem("userId", response.data.userId);
         })

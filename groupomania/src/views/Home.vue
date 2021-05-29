@@ -1,8 +1,9 @@
 <template class="container">
   <div class="row">
-    <div class="jumbotron bg-light">
+    <!-- header -->
+    <header class="jumbotron bg-light">
       <h1>Bienvenue sur le réseau de Groupomania</h1>
-    </div>
+    </header>
     <div>
       <img
         src="../assets/icon.png"
@@ -11,6 +12,7 @@
       />
     </div>
     <div class="col-2"></div>
+    <!-- Navigation -->
     <router-link to="/connection" class="col-3  btn btn-primary">
       Se connecter
     </router-link>

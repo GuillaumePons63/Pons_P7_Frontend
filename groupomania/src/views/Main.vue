@@ -1,8 +1,10 @@
 <template>
   <div class="container-fluid ">
-    <div class="row bg-light">
+    <!-- image de header -->
+    <header class="row bg-light">
       <img src="../assets/icon-left-font.png" class="col-12" />
-    </div>
+    </header>
+    <!-- Bouton de navigation -->
     <nav class="row bg-light">
       <div class="col-md-2"></div>
       <router-link to="/posts" class="btn btn-secondary col-md-2 mt-2">
@@ -18,6 +20,7 @@
       </router-link>
       <div class="col-md-2"></div>
     </nav>
+    <!-- bouton d'administration -->
     <div>
       <router-link
         v-show="isAdmin == 'true'"

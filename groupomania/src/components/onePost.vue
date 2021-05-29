@@ -86,7 +86,6 @@ export default {
   components: { Comment, NewComment, ModifyPost },
   created() {
     moment.locale("fr");
-
     this.dateDisplay = moment(this.date).calendar();
   },
   methods: {
@@ -107,6 +106,7 @@ export default {
       this.urlNewComment = "post/" + id + "/newComment";
     },
     deletePost(id) {
+      // Boite de dialogue de confirmation de suppression
       Swal.fire({
         title: "Êtes-vous sur de vouloir confirmer la suppression ?",
         text: "Vous ne pourrez pas revenir en arrière",
@@ -116,6 +116,7 @@ export default {
         cancelButtonColor: "#d33",
         confirmButtonText: "Oui, je veux supprimer",
       }).then((result) => {
+        // traitement du résultat
         if (result.isConfirmed) {
           let url = "post/" + id;
           authHttp.delete(url).then(() => {
@@ -129,7 +130,6 @@ export default {
         }
       });
     },
-
     showModifyPost() {
       this.modifyPost = "visible";
     },

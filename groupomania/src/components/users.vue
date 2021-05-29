@@ -1,21 +1,21 @@
 <template>
   <div class="container">
     <div class="row">
-      <h3 class="col-1">
+      <h5 class="col-1">
         id
-      </h3>
-      <h3 class="col-2">
+      </h5>
+      <h5 class="col-3">
         firstName
-      </h3>
-      <h3 class="col-2">
+      </h5>
+      <h5 class="col-3">
         lastName
-      </h3>
-      <h3 class="col-2">
+      </h5>
+      <h5 class="col-2">
         job
-      </h3>
-      <h3 class="col-2">
+      </h5>
+      <h5 class="col-2">
         admin
-      </h3>
+      </h5>
     </div>
     <OneUser
       v-for="user in users"

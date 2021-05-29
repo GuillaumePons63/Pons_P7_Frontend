@@ -5,7 +5,6 @@
     <router-link class="btn btn-secondary col-3" to="/main">
       revenir à l'interface utilisateur
     </router-link>
-
     <router-link to="/users" class="btn col-3 btn-secondary">
       Tous les utilisateurs
     </router-link>

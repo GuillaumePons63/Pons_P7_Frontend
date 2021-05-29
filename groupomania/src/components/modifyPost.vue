@@ -30,7 +30,7 @@
       @change="onselect"
       class="btn btn-primary"
     />
-    <button class="btn btn-secondary" @click.prevent="newPost()">
+    <button class="btn btn-secondary" @click.prevent="modifyPost(Id)">
       Envoyer
     </button>
   </div>
@@ -50,9 +50,6 @@ export default {
   },
   props: ["Id", "title"],
   methods: {
-    onselect(event) {
-      this.file = event.target.files[0];
-    },
     modifyPost(Id) {
       const formData = new FormData();
       formData.append("file", this.file);
@@ -60,6 +57,7 @@ export default {
       const modifyPost = {
         title: this.titleModify,
         post: this.postModify,
+        altText: this.altTextModify,
       };
       formData.append("body", JSON.stringify(modifyPost));
       console.log(formData);

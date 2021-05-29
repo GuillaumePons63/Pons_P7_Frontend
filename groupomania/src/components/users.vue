@@ -1,5 +1,22 @@
 <template>
-  <div>
+  <div class="container">
+    <div class="row">
+      <h3 class="col-1">
+        id
+      </h3>
+      <h3 class="col-2">
+        firstName
+      </h3>
+      <h3 class="col-2">
+        lastName
+      </h3>
+      <h3 class="col-2">
+        job
+      </h3>
+      <h3 class="col-2">
+        admin
+      </h3>
+    </div>
     <OneUser
       v-for="user in users"
       :key="user.id"

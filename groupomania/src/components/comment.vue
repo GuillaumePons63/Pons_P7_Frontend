@@ -15,6 +15,8 @@
 
 <script>
 import { authHttp } from "../axios";
+import Swal from "sweetalert2";
+
 export default {
   name: "comment",
   data() {
@@ -25,8 +27,26 @@ export default {
   props: ["firstName", "lastName", "comment", "userId", "id"],
   methods: {
     deleteComment(id) {
-      let url = "/post/comment/" + id;
-      authHttp.delete(url).then(() => document.location.reload());
+      Swal.fire({
+        title: "Êtes-vous sur de vouloir confirmer la suppression ?",
+        text: "Vous ne pourrez pas revenir en arrière",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Oui, je veux supprimer",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          let url = "/post/comment/" + id;
+          authHttp.delete(url).then(() => {
+            Swal.fire(
+              "Supprimé!",
+              "Votre commentaire a été supprimé",
+              "success"
+            ).then(() => location.reload());
+          });
+        }
+      });
     },
   },
 };

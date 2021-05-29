@@ -1,15 +1,9 @@
 <template>
   <div class="container">
-    <form @submit="post()">
+    <form @submit.prevent="post()">
       <label for="mail" class="col-12 col-form-label"> E-mail </label>
       <div class="col-10 mx-auto">
-        <input
-          type="email"
-          id="mail"
-          class="form-control m-0"
-          v-model="email"
-          required
-        />
+        <input type="email" class="form-control m-0" v-model="email" required />
       </div>
 
       <label for="password" class="col-12 col-form-label"> Mot de passe </label>
@@ -17,7 +11,6 @@
       <div class="col-10 mx-auto">
         <input
           type="password"
-          id="password"
           class="form-control m-0"
           v-model="password"
           required
@@ -28,7 +21,6 @@
       <div class="col-10 mx-auto">
         <input
           type="text"
-          id="firstName"
           class="form-control m-0"
           v-model="firstName"
           required
@@ -38,7 +30,6 @@
       <div class="col-10 mx-auto">
         <input
           type="text"
-          id="lastName"
           class="form-control m-0"
           v-model="lastName"
           required
@@ -46,21 +37,21 @@
       </div>
       <label for="job" class="col-12 col-form-label"> Métier </label>
       <div class="col-10 mx-auto">
-        <input
-          type="text"
-          id="job"
-          class="form-control m-0"
-          v-model="job"
-          required
-        />
+        <input type="text" class="form-control m-0" v-model="job" required />
       </div>
-      <button @submit="post" class="btn btn-secondary mt-3">S'inscrire</button>
+      <label for="isAdmin" class="col-4 col-form-label">
+        Administrateur ? </label
+      ><input type="checkbox" v-model="isAdmin" />
+      <div class="col-12">
+        <button class="btn btn-secondary mt-3">S'inscrire</button>
+      </div>
     </form>
   </div>
 </template>
 
 <script>
 import { HTTP } from "../axios";
+import Swal from "sweetalert2";
 
 export default {
   name: "inscription",
@@ -71,21 +62,48 @@ export default {
       firstName: null,
       lastName: null,
       job: null,
+      isAdmin: 0,
     };
   },
   methods: {
     post() {
-      const user = {
-        email: this.email,
-        password: this.password,
-        firstName: this.firstName,
-        lastName: this.lastName,
-        job: this.job,
-      };
-      console.log(user);
-      HTTP.post("auth/signup", user)
-        .then((response) => console.log(response.data.id))
-        .catch((error) => console.log(error));
+      Swal.fire({
+        title: "confirmez votre mot de passe",
+        input: "password",
+        inputLabel: "Password",
+        inputPlaceholder: "",
+      }).then((password) => {
+        if (this.password == password.value) {
+          const user = {
+            email: this.email,
+            password: this.password,
+            firstName: this.firstName,
+            lastName: this.lastName,
+            job: this.job,
+            isAdmin: this.isAdmin,
+          };
+
+          HTTP.post("auth/signup", user)
+            .then(() =>
+              Swal.fire("Vous pouvez maintenant vous connecter").then(() =>
+                this.$router.push({ path: "/connection" })
+              )
+            )
+            .catch(() =>
+              Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Il y a eu un problème",
+              })
+            );
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Les mots de passe ne correspondent pas",
+          });
+        }
+      });
     },
   },
 };

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <form @submit="newPost()">
+    <form @submit.prevent="newPost()">
       <label for="title" class="col-12 col-form-label">
         Titre de la publication
       </label>
@@ -42,6 +42,7 @@
 
 <script>
 import { authHttp } from "../axios";
+import Swal from "sweetalert2";
 
 export default {
   name: "newPost",
@@ -63,11 +64,16 @@ export default {
       const newPost = {
         title: this.title,
         post: this.post,
+        altText: this.altText,
       };
       formData.append("body", JSON.stringify(newPost));
       authHttp
         .post("post/newPost", formData)
-        .then(() => this.$router.push({ name: "posts" }))
+        .then(() => {
+          Swal.fire("Publication créée avec succés").then(() =>
+            this.$router.push({ path: "/posts" })
+          );
+        })
         .catch((error) => console.log(error));
     },
   },

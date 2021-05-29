@@ -3,7 +3,7 @@
     <div class="card-header">
       {{ dateDisplay }} {{ firstName }} {{ lastName }} a publié {{ title }}
     </div>
-    <img class="card-img-top" :src="src" alt="altText" /> <br />
+    <img class="card-img-top" :src="src" :alt="altText" /> <br />
     <p class="cardbody">{{ post }}</p>
     <button
       class="btn btn-danger mt-3"
@@ -55,6 +55,7 @@ import { authHttp } from "../axios";
 import NewComment from "../components/newComment";
 import ModifyPost from "../components/modifyPost";
 import moment from "moment";
+import Swal from "sweetalert2";
 
 export default {
   name: "onePost",
@@ -80,6 +81,7 @@ export default {
     "id",
     "userId",
     "date",
+    "altText",
   ],
   components: { Comment, NewComment, ModifyPost },
   created() {
@@ -105,9 +107,29 @@ export default {
       this.urlNewComment = "post/" + id + "/newComment";
     },
     deletePost(id) {
-      let url = "post/" + id;
-      authHttp.delete(url).then(() => document.location.reload());
+      Swal.fire({
+        title: "Êtes-vous sur de vouloir confirmer la suppression ?",
+        text: "Vous ne pourrez pas revenir en arrière",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Oui, je veux supprimer",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          let url = "post/" + id;
+          authHttp.delete(url).then(() => {
+            document.location.reload();
+          });
+          Swal.fire(
+            "Supprimé!",
+            "Votre publication a été supprimé",
+            "success"
+          ).then(() => document.location.reload());
+        }
+      });
     },
+
     showModifyPost() {
       this.modifyPost = "visible";
     },

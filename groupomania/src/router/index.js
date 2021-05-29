@@ -7,6 +7,7 @@ import Posts from "../components/posts.vue";
 import NewPost from "../components/newPost.vue";
 import Disconnect from "../components/disconnect.vue";
 import Administration from "../views/Administration.vue";
+import Users from "../components/users.vue";
 
 const routes = [
   {
@@ -53,6 +54,14 @@ const routes = [
     path: "/administration",
     name: "administration",
     component: Administration,
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: "/users",
+        name: "users",
+        component: Users,
+      },
+    ],
   },
 ];
 

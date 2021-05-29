@@ -2,18 +2,13 @@
   <div class="container">
     <label for="mail" class="col-12 col-form-label"> E-mail </label>
     <div class="col-10 mx-auto">
-      <input type="email" id="mail" class="form-control m-0 " v-model="email" />
+      <input type="email" class="form-control m-0 " v-model="email" />
     </div>
     <label for="password" class="col-12 col-form-label">
       Mot de passe
     </label>
     <div class="col-10 d-block mx-auto">
-      <input
-        type="password"
-        id="password"
-        class="form-control m-0"
-        v-model="password"
-      />
+      <input type="password" class="form-control m-0" v-model="password" />
     </div>
     <button class="btn btn-secondary mt-3" @click.prevent="post">
       Se connecter

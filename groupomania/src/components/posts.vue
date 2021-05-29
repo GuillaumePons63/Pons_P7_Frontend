@@ -12,6 +12,7 @@
         :userId="post.userId"
         :date="post.createdAt"
         v-bind:src="post.imageUrl"
+        v-bind:altText="post.altText"
       />
     </div>
   </div>

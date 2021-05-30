@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { authHttp } from "../axios";
+import { http } from "../axios";
 import Swal from "sweetalert2";
 
 export default {
@@ -22,8 +22,12 @@ export default {
       const newComment = {
         comment: this.comment,
       };
-      authHttp
-        .post(this.urlNewComment, newComment)
+      http
+        .post(this.urlNewComment, newComment, {
+          headers: {
+            Authorization: "Bearer" + " " + localStorage.getItem("token"),
+          },
+        })
         .then(() =>
           Swal.fire(
             "Ajouté!",

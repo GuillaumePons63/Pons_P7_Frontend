@@ -51,7 +51,7 @@
 
 <script>
 import Comment from "../components/comment";
-import { authHttp } from "../axios";
+import { http } from "../axios";
 import NewComment from "../components/newComment";
 import ModifyPost from "../components/modifyPost";
 import moment from "moment";
@@ -91,8 +91,12 @@ export default {
   methods: {
     getComment(id) {
       let url = "post/" + id + "/comment";
-      authHttp
-        .get(url)
+      http
+        .get(url, {
+          headers: {
+            Authorization: "Bearer" + " " + localStorage.getItem("token"),
+          },
+        })
         .then((response) => {
           this.comments = response.data;
           if (this.comments.length === 0) {
@@ -119,9 +123,15 @@ export default {
         // traitement du résultat
         if (result.isConfirmed) {
           let url = "post/" + id;
-          authHttp.delete(url).then(() => {
-            document.location.reload();
-          });
+          http
+            .delete(url, {
+              headers: {
+                Authorization: "Bearer" + " " + localStorage.getItem("token"),
+              },
+            })
+            .then(() => {
+              document.location.reload();
+            });
           Swal.fire(
             "Supprimé!",
             "Votre publication a été supprimé",

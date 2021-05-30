@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { HTTP } from "../axios";
+import { http } from "../axios";
 
 export default {
   name: "connection",
@@ -34,7 +34,8 @@ export default {
         email: this.email,
         password: this.password,
       };
-      HTTP.post("auth/login", user)
+      http
+        .post("auth/login", user)
         .then((response) => {
           localStorage.setItem("isAdmin", response.data.isAdmin);
           localStorage.setItem("token", response.data.token);

@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { authHttp } from "../axios";
+import { http } from "../axios";
 import Swal from "sweetalert2";
 
 export default {
@@ -67,8 +67,12 @@ export default {
         altText: this.altText,
       };
       formData.append("body", JSON.stringify(newPost));
-      authHttp
-        .post("post/newPost", formData)
+      http
+        .post("post/newPost", formData, {
+          headers: {
+            Authorization: "Bearer" + " " + localStorage.getItem("token"),
+          },
+        })
         .then(() => {
           Swal.fire("Publication créée avec succés").then(() =>
             this.$router.push({ path: "/posts" })

@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import { HTTP } from "../axios";
+import { http } from "../axios";
 import Swal from "sweetalert2";
 
 export default {
@@ -83,7 +83,7 @@ export default {
             isAdmin: this.isAdmin,
           };
 
-          HTTP.post("auth/signup", user)
+          http.post("auth/signup", user)
             .then(() =>
               Swal.fire("Vous pouvez maintenant vous connecter").then(() =>
                 this.$router.push({ path: "/connection" })

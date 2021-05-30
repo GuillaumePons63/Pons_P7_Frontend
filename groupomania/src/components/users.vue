@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { authHttp } from "../axios";
+import { http } from "../axios";
 import OneUser from "../components/oneUser";
 
 export default {
@@ -42,8 +42,12 @@ export default {
   },
   components: { OneUser },
   created() {
-    authHttp
-      .get("admin/alluser")
+    http
+      .get("admin/alluser", {
+        headers: {
+          Authorization: "Bearer" + " " + localStorage.getItem("token"),
+        },
+      })
       .then((response) => (this.users = response.data))
       .catch((error) => ({ error }));
   },

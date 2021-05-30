@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { authHttp } from "../axios";
+import { http } from "../axios";
 
 import OnePost from "../components/onePost";
 
@@ -32,8 +32,12 @@ export default {
   },
   components: { OnePost },
   created() {
-    authHttp
-      .get("post")
+    http
+      .get("post", {
+        headers: {
+          Authorization: "Bearer" + " " + localStorage.getItem("token"),
+        },
+      })
       .then((response) => (this.posts = response.data))
       .catch((error) => ({ error }));
   },

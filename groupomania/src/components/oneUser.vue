@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { authHttp } from "../axios";
+import { http } from "../axios";
 import Swal from "sweetalert2";
 
 export default {
@@ -41,11 +41,15 @@ export default {
         cancelButtonColor: "#d33",
         confirmButtonText: "Oui, je veux supprimer",
       }).then((result) => {
-      //Traitement du résultat
+        //Traitement du résultat
         if (result.isConfirmed) {
           let url = "admin/user/" + id;
-          authHttp
-            .delete(url)
+          http
+            .delete(url, {
+              headers: {
+                Authorization: "Bearer" + " " + localStorage.getItem("token"),
+              },
+            })
             .then(() => {
               Swal.fire(
                 "Supprimé!",

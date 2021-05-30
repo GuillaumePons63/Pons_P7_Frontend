@@ -12,24 +12,7 @@
     <div class="col-10 d-block mx-auto">
       <input type="text" class="form-control m-0" v-model="postModify" />
     </div>
-    <label for="alt-picture" class="col-12 col-form-label">
-      Description de l'image
-    </label>
-    <div class="col-10 d-block mx-auto">
-      <input
-        type="text"
-        class="form-control m-0"
-        name="alt-picture"
-        v-model="altTextModify"
-      />
-    </div>
 
-    <input
-      type="file"
-      name="picture"
-      @change="onselect"
-      class="btn btn-primary"
-    />
     <button class="btn btn-secondary" @click.prevent="modifyPost(Id)">
       Envoyer
     </button>
@@ -37,7 +20,9 @@
 </template>
 
 <script>
-import { authHttp } from "../axios";
+import { http } from "../axios";
+import Swal from "sweetalert2";
+
 export default {
   name: "modifyPost",
   data: () => {
@@ -51,19 +36,23 @@ export default {
   props: ["Id", "title"],
   methods: {
     modifyPost(Id) {
-      const formData = new FormData();
-      formData.append("file", this.file);
       let url = "post/" + Id;
       const modifyPost = {
         title: this.titleModify,
         post: this.postModify,
-        altText: this.altTextModify,
       };
-      formData.append("body", JSON.stringify(modifyPost));
-      console.log(formData);
-      authHttp
-        .put(url, formData)
-        .then(() => this.$router.push({ name: "Main" }))
+
+      http
+        .put(url, modifyPost, {
+          headers: {
+            Authorization: "Bearer" + " " + localStorage.getItem("token"),
+          },
+        })
+        .then(() => {
+          Swal.fire("Publication modifiée avec succés").then(() =>
+            this.$router.push({ path: "/main" })
+          );
+        })
         .catch((error) => console.log(error));
     },
   },

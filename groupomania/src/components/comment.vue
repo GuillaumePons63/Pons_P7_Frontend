@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { authHttp } from "../axios";
+import { http } from "../axios";
 import Swal from "sweetalert2";
 
 export default {
@@ -38,13 +38,19 @@ export default {
       }).then((result) => {
         if (result.isConfirmed) {
           let url = "/post/comment/" + id;
-          authHttp.delete(url).then(() => {
-            Swal.fire(
-              "Supprimé!",
-              "Votre commentaire a été supprimé",
-              "success"
-            ).then(() => location.reload());
-          });
+          http
+            .delete(url, {
+              headers: {
+                Authorization: "Bearer" + " " + localStorage.getItem("token"),
+              },
+            })
+            .then(() => {
+              Swal.fire(
+                "Supprimé!",
+                "Votre commentaire a été supprimé",
+                "success"
+              ).then(() => location.reload());
+            });
         }
       });
     },

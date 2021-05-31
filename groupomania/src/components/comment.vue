@@ -5,7 +5,7 @@
 
       <div>{{ comment }}</div>
     </div>
-    <div v-show="userId == localUser">
+    <div v-show="userId == localUser || isAdmin == 'true'">
       <button @click="deleteComment(id)" class="btn btn-danger m-2">
         Supprimer
       </button>
@@ -22,6 +22,7 @@ export default {
   data() {
     return {
       localUser: localStorage.getItem("userId"),
+      isAdmin: localStorage.getItem("isAdmin"),
     };
   },
   props: ["firstName", "lastName", "comment", "userId", "id"],

@@ -7,7 +7,7 @@
     <p class="cardbody">{{ post }}</p>
     <button
       class="btn btn-danger mt-3"
-      v-show="userId == localUser"
+      v-show="userId == localUser || isAdmin == 'true'"
       @click="deletePost(id)"
     >
       Supprimer
@@ -66,6 +66,7 @@ export default {
       newCommentVisible: "",
       urlNewComment: "",
       localUser: localStorage.getItem("userId"),
+      isAdmin: localStorage.getItem("isAdmin"),
       modifyPost: "",
       Id: "",
       Title: "",

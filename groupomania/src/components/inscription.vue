@@ -39,9 +39,7 @@
       <div class="col-10 mx-auto">
         <input type="text" class="form-control m-0" v-model="job" required />
       </div>
-      <label for="isAdmin" class="col-4 col-form-label">
-        Administrateur ? </label
-      ><input type="checkbox" v-model="isAdmin" />
+
       <div class="col-12">
         <button class="btn btn-secondary mt-3">S'inscrire</button>
       </div>
@@ -62,7 +60,6 @@ export default {
       firstName: null,
       lastName: null,
       job: null,
-      isAdmin: 0,
     };
   },
   methods: {
@@ -80,10 +77,10 @@ export default {
             firstName: this.firstName,
             lastName: this.lastName,
             job: this.job,
-            isAdmin: this.isAdmin,
           };
 
-          http.post("auth/signup", user)
+          http
+            .post("auth/signup", user)
             .then(() =>
               Swal.fire("Vous pouvez maintenant vous connecter").then(() =>
                 this.$router.push({ path: "/connection" })
